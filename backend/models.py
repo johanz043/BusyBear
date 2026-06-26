@@ -3,6 +3,7 @@ from extensions import db
 
 
 class User(db.Model):
+    __tablename__ = "users"
 
     id = db.Column(
         db.Integer,
@@ -22,7 +23,7 @@ class User(db.Model):
     )
 
     password = db.Column(
-        db.String(200),
+        db.String(255),
         nullable=False
     )
 
@@ -33,6 +34,7 @@ class User(db.Model):
 
 
 class Task(db.Model):
+    __tablename__ = "tasks"
 
     id = db.Column(
         db.Integer,
@@ -69,5 +71,5 @@ class Task(db.Model):
 
     user_id = db.Column(
         db.Integer,
-        db.ForeignKey("user.id")
+        db.ForeignKey("users.id")
     )
