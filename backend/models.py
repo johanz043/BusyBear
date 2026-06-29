@@ -32,6 +32,13 @@ class User(db.Model):
         default=datetime.utcnow
     )
 
+    tasks = db.relationship(
+        "Task",
+        backref="user",
+        lazy=True,
+        cascade="all, delete-orphan"
+    )
+
 
 class Task(db.Model):
     __tablename__ = "tasks"
@@ -69,7 +76,14 @@ class Task(db.Model):
         default=datetime.utcnow
     )
 
+    updated_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow,
+        onupdate=datetime.utcnow
+    )
+
     user_id = db.Column(
         db.Integer,
-        db.ForeignKey("users.id")
+        db.ForeignKey("users.id"),
+        nullable=False
     )

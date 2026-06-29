@@ -5,6 +5,7 @@ import os
 
 from extensions import db
 
+
 load_dotenv()
 
 
@@ -12,24 +13,34 @@ app = Flask(__name__)
 
 CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    os.getenv("DATABASE_URL")
+)
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+
 db.init_app(app)
+
 
 from routes import routes
 
 app.register_blueprint(routes)
 
+
 with app.app_context():
     from models import User, Task
     db.create_all()
 
+
 @app.route("/")
 def home():
+
     return {
         "message": "BusyBear API is running 🐻"
     }
+
 
 if __name__ == "__main__":
     app.run(debug=True)
