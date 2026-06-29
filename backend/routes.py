@@ -60,37 +60,43 @@ def login():
 
     data = request.get_json()
 
+    # Accept either username or email
+    identifier = data.get("username") or data.get("email")
+    password = data.get("password")
 
-    user = User.query.filter_by(
-        email=data["email"]
+    if not identifier or not password:
+        return jsonify({
+            "message": "Username/email and password are required."
+        }), 400
+
+    # Find user by username OR email
+    user = User.query.filter(
+        (User.username == identifier) |
+        (User.email == identifier)
     ).first()
 
-
-    if user is None:
-
+    if not user:
         return jsonify({
-            "message": "User not found"
-        }), 404
+            "message": "User not found."
+        }), 401
 
-
-
-    if check_password_hash(
-        user.password_hash,
-        data["password"]
-    ):
-
-        token = create_access_token(
-            identity=str(user.id)
-)
-
+    # Check password
+    if not check_password_hash(user.password_hash, password):
         return jsonify({
-            "access_token": token
-        })
+            "message": "Invalid password."
+        }), 401
 
+    # Create JWT
+    access_token = create_access_token(identity=str(user.id))
 
     return jsonify({
-        "message": "Invalid password"
-    }), 401
+        "access_token": access_token,
+        "user": {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email
+        }
+    }), 200
 
 
 
