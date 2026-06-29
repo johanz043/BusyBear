@@ -3,6 +3,8 @@ from flask import Blueprint, request, jsonify
 from extensions import db
 from models import User, Task
 
+from werkzeug.security import generate_password_hash
+
 
 routes = Blueprint(
     "routes",
@@ -18,10 +20,14 @@ def create_user():
 
     data = request.get_json()
 
+    hashed_password = generate_password_hash(
+        data["password"]
+    )
+
     user = User(
         username=data["username"],
         email=data["email"],
-        password=data["password"]
+        password_hash=hashed_password
     )
 
     db.session.add(user)
@@ -33,8 +39,9 @@ def create_user():
     })
 
 
+
 # =========================
-# GET ALL TASKS
+# GET TASKS
 # =========================
 @routes.route("/tasks", methods=["GET"])
 def get_tasks():
@@ -69,10 +76,7 @@ def create_task():
     task = Task(
         title=data["title"],
         description=data.get("description"),
-        priority=data.get(
-            "priority",
-            "Medium"
-        ),
+        priority=data.get("priority", "Medium"),
         user_id=data["user_id"]
     )
 
@@ -119,14 +123,11 @@ def update_task(id):
     if "title" in data:
         task.title = data["title"]
 
-
     if "description" in data:
         task.description = data["description"]
 
-
     if "status" in data:
         task.status = data["status"]
-
 
     if "priority" in data:
         task.priority = data["priority"]
@@ -149,7 +150,6 @@ def update_task(id):
 def delete_task(id):
 
     task = Task.query.get_or_404(id)
-
 
     db.session.delete(task)
     db.session.commit()
