@@ -21,9 +21,9 @@ from routes import routes
 
 app.register_blueprint(routes)
 
-#with app.app_context():
- #   from models import User, Task
-  #  db.create_all()
+with app.app_context():
+    from models import User, Task
+    db.create_all()
 
 @app.route("/")
 def home():
