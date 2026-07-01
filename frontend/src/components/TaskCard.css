@@ -1,0 +1,118 @@
+.task-card {
+
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    box-shadow:var(--shadow);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    transition:.2s;
+
+
+}
+
+
+
+.task-card:hover {
+
+    transform:translateY(-3px);
+
+}
+
+
+
+
+.task-content h3 {
+
+    margin-bottom:8px;
+
+    font-size:22px;
+
+}
+
+
+
+
+.task-content p {
+
+    color:var(--text-light);
+
+}
+
+
+
+
+
+.task-actions {
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+
+
+
+.edit-btn {
+
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    padding:10px 16px;
+
+    border-radius:10px;
+
+}
+
+
+
+
+
+.delete-btn {
+
+
+    background:#EF4444;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 16px;
+
+    border-radius:10px;
+
+}
+
+
+
+
+
+@media(max-width:700px){
+
+
+.task-card {
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+
+}

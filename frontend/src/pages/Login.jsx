@@ -1,120 +1,246 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaPaw } from "react-icons/fa6";
+
 import api from "../services/api";
 
+import "./Login.css";
 
-function Login(){
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+function Login() {
+
 
     const navigate = useNavigate();
 
 
+    const [username, setUsername] = useState("");
 
-    async function handleLogin(e){
+    const [password, setPassword] = useState("");
+
+    const [error, setError] = useState("");
+
+    const [loading, setLoading] = useState(false);
+
+
+
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
 
+        setError("");
+
+        setLoading(true);
+
+
         try {
 
-            const response = await api.post("/login", {
 
-                username,
-                password
-
-            });
-
-
-
-            const token = response.data.access_token;
-
+            const response = await api.post(
+                "/login",
+                {
+                    username,
+                    password
+                }
+            );
 
 
             localStorage.setItem(
                 "token",
-                token
+                response.data.token
             );
 
 
             navigate("/dashboard");
 
 
-        } catch(error){
+        } catch (err) {
 
 
-            console.log(error.response);
-
-
-            alert(
-                error.response?.data?.message ||
-                "Login failed"
+            setError(
+                "Invalid username/email or password"
             );
+
 
         }
 
-    }
+
+        setLoading(false);
+
+    };
 
 
 
     return (
 
-        <div>
-
-            <h1>
-                BusyBear Login
-            </h1>
+        <div className="login-page">
 
 
-
-            <form onSubmit={handleLogin}>
-
-
-                <input
-
-                    placeholder="Username or Email"
-
-                    value={username}
-
-                    onChange={
-                        e => setUsername(e.target.value)
-                    }
-
-                />
+            <div className="login-card">
 
 
+                <div className="login-logo">
 
-                <input
 
-                    type="password"
+                    <h1>
 
-                    placeholder="Password"
+                        🐻
 
-                    value={password}
+                    </h1>
 
-                    onChange={
-                        e => setPassword(e.target.value)
-                    }
 
-                />
+                    <h2>
+
+                        BusyBear
+
+                    </h2>
+
+
+                    <p>
+
+                        Stay organized.
+                        Stay productive.
+
+                    </p>
+
+
+                </div>
 
 
 
-                <button>
-                    Login
-                </button>
+                <form onSubmit={handleSubmit}>
 
 
-            </form>
+                    <div className="login-group">
+
+
+                        <label>
+
+                            Username or Email
+
+                        </label>
+
+
+                        <input
+
+                            type="text"
+
+                            value={username}
+
+                            onChange={(e) =>
+                                setUsername(e.target.value)
+                            }
+
+                            placeholder="Enter username or email"
+
+                            required
+
+                        />
+
+
+                    </div>
+
+
+
+                    <div className="login-group">
+
+
+                        <label>
+
+                            Password
+
+                        </label>
+
+
+                        <input
+
+                            type="password"
+
+                            value={password}
+
+                            onChange={(e) =>
+                                setPassword(e.target.value)
+                            }
+
+                            placeholder="Enter password"
+
+                            required
+
+                        />
+
+
+                    </div>
+
+
+
+
+                    <button
+
+                        className="login-btn"
+
+                        disabled={loading}
+
+                        type="submit"
+
+                    >
+
+                        {loading
+                            ? "Signing in..."
+                            : "Sign In"
+                        }
+
+
+                    </button>
+
+
+
+                </form>
+
+
+
+                {
+                    error && (
+
+                        <p className="error-message">
+
+                            {error}
+
+                        </p>
+
+                    )
+                }
+
+
+
+                <div className="login-footer">
+
+
+                    Don't have an account?
+
+
+                    <br/>
+
+
+                    <a href="/register">
+
+                        Create an account
+
+                    </a>
+
+
+                </div>
+
+
+
+            </div>
 
 
         </div>
 
+
     );
 
 }
-
 
 
 export default Login;
