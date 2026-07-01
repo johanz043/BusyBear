@@ -1,47 +1,69 @@
 import {
-  BrowserRouter,
   Routes,
-  Route,
-  Navigate
+  Route
 } from "react-router-dom";
 
+
 import Login from "./pages/Login";
+
 import Dashboard from "./pages/Dashboard";
+
 import ProtectedRoute from "./components/ProtectedRoute";
+
 
 
 function App() {
 
+
   return (
 
-      <BrowserRouter>
 
-          <Routes>
+      <Routes>
 
-              <Route
-                  path="/"
-                  element={<Navigate to="/login" />}
-              />
 
-              <Route
-                  path="/login"
-                  element={<Login />}
-              />
+          <Route
 
-              <Route
-                  path="/dashboard"
-                  element={
-                      <ProtectedRoute>
-                          <Dashboard />
-                      </ProtectedRoute>
-                  }
-              />
+              path="/"
 
-          </Routes>
+              element={<Login />}
 
-      </BrowserRouter>
+          />
+
+
+
+          <Route
+
+              path="/login"
+
+              element={<Login />}
+
+          />
+
+
+
+
+          <Route
+
+              path="/dashboard"
+
+              element={
+
+                  <ProtectedRoute>
+
+                      <Dashboard />
+
+                  </ProtectedRoute>
+
+              }
+
+          />
+
+
+      </Routes>
+
 
   );
+
 }
 
 

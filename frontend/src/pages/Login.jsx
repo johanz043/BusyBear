@@ -24,9 +24,7 @@ function Login() {
 
     const handleSubmit = async (e) => {
 
-
         e.preventDefault();
-
 
         setError("");
 
@@ -40,16 +38,11 @@ function Login() {
                 "/login",
 
                 {
-
                     username,
-
                     password
-
                 }
 
             );
-
-
 
 
 
@@ -63,14 +56,10 @@ function Login() {
 
 
 
-
-
             navigate("/dashboard");
 
 
-
-        }
-        catch(error){
+        } catch (error) {
 
 
             console.error(
@@ -90,9 +79,7 @@ function Login() {
 
             );
 
-
         }
-
 
     };
 
@@ -100,35 +87,33 @@ function Login() {
 
 
 
-
-
     return (
 
-
         <div className="login-page">
-
 
 
             <div className="login-card">
 
 
 
+                <div className="login-logo">
 
 
-                <h1>
+                    <h1>
 
-                    🐻 BusyBear
+                        🐻 BusyBear
 
-                </h1>
-
-
+                    </h1>
 
 
-                <p>
+                    <p>
 
-                    Login to manage your tasks
+                        Login to manage your tasks
 
-                </p>
+                    </p>
+
+
+                </div>
 
 
 
@@ -150,73 +135,70 @@ function Login() {
 
 
 
-
-
                 <form onSubmit={handleSubmit}>
 
 
+                    <div className="login-group">
 
 
+                        <label>
 
-                    <input
+                            Username or Email
 
-
-                        type="text"
-
-
-                        placeholder="Username or Email"
+                        </label>
 
 
-                        value={username}
+                        <input
+
+                            type="text"
+
+                            placeholder="Enter username or email"
+
+                            value={username}
+
+                            onChange={(e) =>
+                                setUsername(e.target.value)
+                            }
+
+                            required
+
+                        />
 
 
-                        onChange={
-                            (e) =>
-                            setUsername(
-                                e.target.value
-                            )
-                        }
-
-
-                        required
-
-
-                    />
-
-
-
-
-
-
-
-                    <input
-
-
-                        type="password"
-
-
-                        placeholder="Password"
-
-
-                        value={password}
-
-
-                        onChange={
-                            (e) =>
-                            setPassword(
-                                e.target.value
-                            )
-                        }
-
-
-                        required
-
-
-                    />
+                    </div>
 
 
 
 
+
+                    <div className="login-group">
+
+
+                        <label>
+
+                            Password
+
+                        </label>
+
+
+                        <input
+
+                            type="password"
+
+                            placeholder="Enter password"
+
+                            value={password}
+
+                            onChange={(e) =>
+                                setPassword(e.target.value)
+                            }
+
+                            required
+
+                        />
+
+
+                    </div>
 
 
 
@@ -232,13 +214,7 @@ function Login() {
 
                         Login
 
-
                     </button>
-
-
-
-
-
 
 
                 </form>
@@ -247,19 +223,23 @@ function Login() {
 
 
 
+                <div className="login-footer">
+
+                    Stay productive with BusyBear 🐻
+
+                </div>
+
+
+
 
             </div>
 
 
-
-
         </div>
-
 
     );
 
 }
-
 
 
 export default Login;
