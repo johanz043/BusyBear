@@ -1,0 +1,174 @@
+.modal-overlay {
+
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1000;
+
+
+}
+
+
+
+.task-modal {
+
+
+    background:white;
+
+    width:420px;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    animation:popup .2s ease;
+
+
+}
+
+
+
+
+@keyframes popup {
+
+
+    from{
+
+        transform:scale(.9);
+
+        opacity:0;
+
+    }
+
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+
+
+
+.task-modal h2 {
+
+
+    margin-bottom:25px;
+
+}
+
+
+
+
+
+.task-modal label {
+
+
+    display:block;
+
+    font-weight:600;
+
+    margin-top:15px;
+
+    margin-bottom:8px;
+
+}
+
+
+
+
+
+.task-modal input,
+.task-modal textarea {
+
+
+    width:100%;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+}
+
+
+
+.task-modal textarea {
+
+
+    height:100px;
+
+    resize:none;
+
+}
+
+
+
+
+
+.modal-actions {
+
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+    margin-top:25px;
+
+
+}
+
+
+
+
+
+.cancel-btn {
+
+
+    background:#E2E8F0;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+
+}
+
+
+
+
+
+.save-btn {
+
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:12px;
+
+
+}

@@ -13,7 +13,7 @@ function TaskCard({
         <div className="task-card">
 
 
-            <div className="task-content">
+            <div className="task-top">
 
 
                 <h3>
@@ -21,48 +21,77 @@ function TaskCard({
                 </h3>
 
 
-                <p>
-                    {task.description}
-                </p>
+                <span className="status-badge">
+
+                    Pending
+
+                </span>
 
 
             </div>
 
 
 
-            <div className="task-actions">
 
+            <p className="task-description">
 
-                <button
+                {task.description ||
+                "No description provided"}
 
-                    className="edit-btn"
-
-                    onClick={() =>
-                        onEdit(task)
-                    }
-
-                >
-
-                    Edit
-
-                </button>
+            </p>
 
 
 
 
-                <button
 
-                    className="delete-btn"
+            <div className="task-footer">
 
-                    onClick={() =>
-                        onDelete(task.id)
-                    }
 
-                >
+                <small>
 
-                    Delete
+                    Created recently
 
-                </button>
+                </small>
+
+
+
+                <div>
+
+
+                    <button
+
+                        className="edit-btn"
+
+                        onClick={() =>
+                            onEdit(task)
+                        }
+
+                    >
+
+                        Edit
+
+                    </button>
+
+
+
+
+
+                    <button
+
+                        className="delete-btn"
+
+                        onClick={() =>
+                            onDelete(task.id)
+                        }
+
+                    >
+
+                        Delete
+
+                    </button>
+
+
+                </div>
 
 
 

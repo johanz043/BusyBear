@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaPaw } from "react-icons/fa6";
 
 import api from "../services/api";
 
@@ -19,178 +18,226 @@ function Login() {
 
     const [error, setError] = useState("");
 
-    const [loading, setLoading] = useState(false);
+
 
 
 
     const handleSubmit = async (e) => {
+
 
         e.preventDefault();
 
 
         setError("");
 
-        setLoading(true);
 
 
         try {
 
 
             const response = await api.post(
+
                 "/login",
+
                 {
+
                     username,
+
                     password
+
                 }
+
             );
+
+
+
 
 
             localStorage.setItem(
+
                 "token",
-                response.data.token
+
+                response.data.access_token
+
             );
+
+
+
 
 
             navigate("/dashboard");
 
 
-        } catch (err) {
+
+        }
+        catch(error){
+
+
+            console.error(
+
+                "Login failed:",
+
+                error.response?.data || error
+
+            );
 
 
             setError(
-                "Invalid username/email or password"
+
+                error.response?.data?.message ||
+
+                "Login failed"
+
             );
 
 
         }
 
 
-        setLoading(false);
-
     };
+
+
+
+
 
 
 
     return (
 
+
         <div className="login-page">
+
 
 
             <div className="login-card">
 
 
-                <div className="login-logo">
 
 
-                    <h1>
 
-                        🐻
+                <h1>
 
-                    </h1>
+                    🐻 BusyBear
 
-
-                    <h2>
-
-                        BusyBear
-
-                    </h2>
+                </h1>
 
 
-                    <p>
-
-                        Stay organized.
-                        Stay productive.
-
-                    </p>
 
 
-                </div>
+                <p>
+
+                    Login to manage your tasks
+
+                </p>
+
+
+
+
+
+                {
+                    error && (
+
+                        <div className="error-message">
+
+                            {error}
+
+                        </div>
+
+                    )
+                }
+
+
+
+
 
 
 
                 <form onSubmit={handleSubmit}>
 
 
-                    <div className="login-group">
-
-
-                        <label>
-
-                            Username or Email
-
-                        </label>
-
-
-                        <input
-
-                            type="text"
-
-                            value={username}
-
-                            onChange={(e) =>
-                                setUsername(e.target.value)
-                            }
-
-                            placeholder="Enter username or email"
-
-                            required
-
-                        />
-
-
-                    </div>
 
 
 
-                    <div className="login-group">
+                    <input
 
 
-                        <label>
-
-                            Password
-
-                        </label>
+                        type="text"
 
 
-                        <input
-
-                            type="password"
-
-                            value={password}
-
-                            onChange={(e) =>
-                                setPassword(e.target.value)
-                            }
-
-                            placeholder="Enter password"
-
-                            required
-
-                        />
+                        placeholder="Username or Email"
 
 
-                    </div>
+                        value={username}
+
+
+                        onChange={
+                            (e) =>
+                            setUsername(
+                                e.target.value
+                            )
+                        }
+
+
+                        required
+
+
+                    />
+
+
+
+
+
+
+
+                    <input
+
+
+                        type="password"
+
+
+                        placeholder="Password"
+
+
+                        value={password}
+
+
+                        onChange={
+                            (e) =>
+                            setPassword(
+                                e.target.value
+                            )
+                        }
+
+
+                        required
+
+
+                    />
+
+
+
+
+
 
 
 
 
                     <button
 
-                        className="login-btn"
-
-                        disabled={loading}
-
                         type="submit"
+
+                        className="login-btn"
 
                     >
 
-                        {loading
-                            ? "Signing in..."
-                            : "Sign In"
-                        }
+                        Login
 
 
                     </button>
+
+
+
+
 
 
 
@@ -198,41 +245,12 @@ function Login() {
 
 
 
-                {
-                    error && (
-
-                        <p className="error-message">
-
-                            {error}
-
-                        </p>
-
-                    )
-                }
-
-
-
-                <div className="login-footer">
-
-
-                    Don't have an account?
-
-
-                    <br/>
-
-
-                    <a href="/register">
-
-                        Create an account
-
-                    </a>
-
-
-                </div>
 
 
 
             </div>
+
+
 
 
         </div>
@@ -241,6 +259,7 @@ function Login() {
     );
 
 }
+
 
 
 export default Login;

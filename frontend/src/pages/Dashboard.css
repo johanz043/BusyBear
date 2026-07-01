@@ -146,9 +146,16 @@
 
 .tasks-grid {
 
+
     display:grid;
 
-    gap:20px;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+
+
+    gap:25px;
+
 
 }
 
@@ -171,6 +178,30 @@
     gap:20px;
 
     align-items:flex-start;
+
+}
+
+.empty-state {
+
+
+    background:white;
+
+    padding:50px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+.empty-state h2 {
+
+    font-size:50px;
+
+    margin-bottom:15px;
 
 }
 

@@ -4,118 +4,254 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 import TaskCard from "../components/TaskCard";
+import TaskModal from "../components/TaskModal";
 
 import "./Dashboard.css";
 
 
-function Dashboard() {
+
+function Dashboard(){
 
 
     const navigate = useNavigate();
 
 
-    const [tasks, setTasks] = useState([]);
+
+    const [tasks,setTasks] = useState([]);
+
+    const [modalOpen,setModalOpen] = useState(false);
+
+    const [editingTask,setEditingTask] = useState(null);
 
 
 
-    const fetchTasks = async () => {
-
-        try {
-
-            const response = await api.get("/tasks");
-
-            setTasks(response.data);
 
 
-        } catch (error) {
+
+    const fetchTasks = async()=>{
+
+
+        try{
+
+
+            const response =
+                await api.get("/tasks");
+
+
+            setTasks(
+                response.data
+            );
+
+
+        }
+        catch(error){
+
 
             console.error(
                 "Error fetching tasks:",
-                error
+                error.response?.data || error
             );
 
+
         }
+
 
     };
 
 
 
-    useEffect(() => {
+
+
+
+
+    useEffect(()=>{
+
 
         fetchTasks();
 
-    }, []);
+
+    },[]);
 
 
 
 
-    const handleLogout = () => {
+
+
+
+
+    const handleLogout = ()=>{
+
 
         localStorage.removeItem("token");
 
+
         navigate("/");
+
 
     };
 
 
 
-    const handleDeleteTask = async (id) => {
 
-        try {
 
-            await api.delete(`/tasks/${id}`);
 
-            setTasks(
-                tasks.filter(
-                    task => task.id !== id
-                )
+
+
+    const handleDeleteTask = async(id)=>{
+
+
+        try{
+
+
+            await api.delete(
+                `/tasks/${id}`
             );
 
 
-        } catch(error){
 
-            console.error(
-                "Delete failed:",
-                error
-            );
+            fetchTasks();
+
+
+
+        }
+        catch(error){
+
+
+            console.error(error);
+
 
         }
 
-    };
-
-
-
-
-    const handleEditTask = (task) => {
-
-        console.log(
-            "Edit task:",
-            task
-        );
-
-        // We'll replace this with a modal later
 
     };
 
 
 
 
-    const handleCreateTask = () => {
 
-        console.log(
-            "Create task"
-        );
 
-        // We'll add modal later
+
+    const handleCreateTask = ()=>{
+
+
+        setEditingTask(null);
+
+
+        setModalOpen(true);
+
 
     };
+
+
+
+
+
+
+
+
+    const handleEditTask = (task)=>{
+
+
+        setEditingTask(task);
+
+
+        setModalOpen(true);
+
+
+    };
+
+
+
+
+
+
+
+
+
+    const saveTask = async(data)=>{
+
+
+        try{
+
+
+            if(editingTask){
+
+
+
+                await api.put(
+
+                    `/tasks/${editingTask.id}`,
+
+                    data
+
+                );
+
+
+
+            }
+            else{
+
+
+
+                await api.post(
+
+                    "/tasks",
+
+                    data
+
+                );
+
+
+
+            }
+
+
+
+
+            setModalOpen(false);
+
+
+            setEditingTask(null);
+
+
+            fetchTasks();
+
+
+
+        }
+        catch(error){
+
+
+            console.error(
+
+                "Saving task failed:",
+
+                error.response?.data || error
+
+            );
+
+
+        }
+
+
+
+    };
+
+
+
+
+
+
 
 
 
 
     return (
 
+
         <div className="dashboard-page">
+
+
 
 
 
@@ -150,11 +286,14 @@ function Dashboard() {
 
                     Logout
 
+
                 </button>
 
 
 
             </div>
+
+
 
 
 
@@ -175,7 +314,9 @@ function Dashboard() {
                         {tasks.length}
                     </h1>
 
+
                 </div>
+
 
 
 
@@ -216,7 +357,9 @@ function Dashboard() {
 
 
 
+
             </div>
+
 
 
 
@@ -257,20 +400,37 @@ function Dashboard() {
 
 
 
+
             <div className="tasks-grid">
 
 
 
-                {tasks.length === 0 ? (
+                {
+
+                tasks.length === 0 ?
 
 
-                    <p>
-                        No tasks yet 🐻
-                    </p>
+                (
+
+                    <div className="empty-state">
+
+                        <h2>
+                            🐻
+                        </h2>
+
+                        <p>
+                            No tasks yet.
+                        </p>
+
+                    </div>
+
+                )
 
 
-                ) : (
+                :
 
+
+                (
 
                     tasks.map(task => (
 
@@ -290,8 +450,10 @@ function Dashboard() {
 
                     ))
 
+                )
 
-                )}
+
+                }
 
 
 
@@ -301,7 +463,35 @@ function Dashboard() {
 
 
 
+
+
+            <TaskModal
+
+
+                isOpen={modalOpen}
+
+
+                closeModal={() =>
+                    setModalOpen(false)
+                }
+
+
+                saveTask={saveTask}
+
+
+                editingTask={editingTask}
+
+
+
+            />
+
+
+
+
+
+
         </div>
+
 
     );
 
