@@ -67,6 +67,8 @@ def create_user():
 
 
 
+
+
 # =========================
 # LOGIN
 # =========================
@@ -210,7 +212,10 @@ def get_tasks():
 
             "status": task.status,
 
-            "priority": task.priority
+            "priority": task.priority,
+
+            # NEW
+            "completed": task.completed
 
         }
 
@@ -270,6 +275,8 @@ def create_task():
             "priority",
             "Medium"
         ),
+
+        completed=False,
 
         user_id=user_id
 
@@ -372,6 +379,16 @@ def update_task(id):
     )
 
 
+    # NEW
+    task.completed = data.get(
+
+        "completed",
+
+        task.completed
+
+    )
+
+
 
 
 
@@ -386,6 +403,62 @@ def update_task(id):
         "Task updated"
 
     })
+
+
+
+
+
+
+
+
+
+# =========================
+# COMPLETE TASK
+# =========================
+
+@routes.route(
+    "/tasks/<int:id>/complete",
+    methods=["PATCH"]
+)
+@jwt_required()
+def complete_task(id):
+
+
+    user_id = int(
+        get_jwt_identity()
+    )
+
+
+
+    task = Task.query.filter_by(
+
+        id=id,
+
+        user_id=user_id
+
+    ).first_or_404()
+
+
+
+    task.completed = not task.completed
+
+
+
+    db.session.commit()
+
+
+
+    return jsonify({
+
+        "message":
+        "Task completion updated",
+
+        "completed":
+        task.completed
+
+    })
+
+
 
 
 

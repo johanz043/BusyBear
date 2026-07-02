@@ -1,230 +1,51 @@
-.task-card {
-
-    background: white;
-
-    border-radius: 22px;
-
-    padding: 25px;
-
-    box-shadow: var(--shadow);
-
-    transition: .25s;
-
-}
+.complete-btn {
 
 
+    background:#22C55E;
 
-.task-card:hover {
+    color:white;
 
-    transform: translateY(-5px);
+    border:none;
 
-    box-shadow:
-        0 15px 35px rgba(0, 0, 0, .12);
+    padding:10px 15px;
+
+    border-radius:10px;
+
+    margin-right:10px;
+
+    cursor:pointer;
 
 }
 
 
 
+.complete-btn:hover {
 
-
-.task-top {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: flex-start;
-
-    margin-bottom: 15px;
-
-    gap: 15px;
+    background:#16A34A;
 
 }
 
 
 
 
+.complete-btn.undo {
 
-.task-top h3 {
-
-    font-size: 22px;
-
-    margin: 0;
-
-    flex: 1;
+    background:#64748B;
 
 }
 
 
 
+.task-card.completed {
 
-
-.priority-badge {
-
-    padding: 6px 14px;
-
-    border-radius: 999px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    text-transform: capitalize;
-
-    white-space: nowrap;
+    opacity:.65;
 
 }
 
 
 
+.task-card.completed h3 {
 
-
-.priority-badge.high {
-
-    background: #FEE2E2;
-
-    color: #DC2626;
-
-}
-
-
-
-
-
-.priority-badge.medium {
-
-    background: #FEF3C7;
-
-    color: #D97706;
-
-}
-
-
-
-
-
-.priority-badge.low {
-
-    background: #DCFCE7;
-
-    color: #16A34A;
-
-}
-
-
-
-
-
-.task-description {
-
-    color: var(--text-light);
-
-    line-height: 1.6;
-
-    margin-bottom: 25px;
-
-}
-
-
-
-
-
-.task-footer {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-}
-
-
-
-
-
-.task-footer small {
-
-    color: var(--text-light);
-
-}
-
-
-
-
-
-.edit-btn {
-
-    background: var(--primary);
-
-    color: white;
-
-    border: none;
-
-    padding: 10px 15px;
-
-    border-radius: 10px;
-
-    margin-right: 10px;
-
-    cursor: pointer;
-
-    transition: .2s;
-
-}
-
-
-
-.edit-btn:hover {
-
-    background: var(--primary-hover);
-
-}
-
-
-
-
-
-.delete-btn {
-
-    background: #EF4444;
-
-    color: white;
-
-    border: none;
-
-    padding: 10px 15px;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    transition: .2s;
-
-}
-
-
-
-.delete-btn:hover {
-
-    background: #DC2626;
-
-}
-
-
-
-
-
-@media (max-width:600px) {
-
-    .task-footer {
-
-        flex-direction: column;
-
-        gap: 15px;
-
-        align-items: flex-start;
-
-    }
+    text-decoration:line-through;
 
 }

@@ -126,6 +126,35 @@ function Dashboard(){
     };
 
 
+    const handleCompleteTask = async(id)=>{
+
+
+        try{
+    
+    
+            await api.patch(
+    
+                `/tasks/${id}/complete`
+    
+            );
+    
+    
+            fetchTasks();
+    
+    
+        }
+        catch(error){
+    
+            console.error(
+                "Completing task failed:",
+                error
+            );
+    
+        }
+    
+    };
+
+
 
 
 
@@ -444,6 +473,8 @@ function Dashboard(){
                             onDelete={handleDeleteTask}
 
                             onEdit={handleEditTask}
+
+                            onComplete={handleCompleteTask}
 
                         />
 

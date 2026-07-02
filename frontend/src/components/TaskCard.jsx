@@ -1,14 +1,32 @@
 import "./TaskCard.css";
 
+
+
 function TaskCard({
+
     task,
+
     onDelete,
-    onEdit
+
+    onEdit,
+
+    onComplete
+
 }) {
+
 
     return (
 
-        <div className="task-card">
+        <div
+
+            className={
+                task.completed
+                ? "task-card completed"
+                : "task-card"
+            }
+
+        >
+
 
 
             <div className="task-top">
@@ -21,8 +39,13 @@ function TaskCard({
                 </h3>
 
 
+
                 <span
-                    className={`priority-badge ${task.priority.toLowerCase()}`}
+
+                    className={
+                        `priority-badge ${task.priority.toLowerCase()}`
+                    }
+
                 >
 
                     {task.priority}
@@ -30,17 +53,23 @@ function TaskCard({
                 </span>
 
 
+
             </div>
+
 
 
 
 
             <p className="task-description">
 
+
                 {task.description ||
-                    "No description provided"}
+
+                "No description provided"}
+
 
             </p>
+
 
 
 
@@ -51,13 +80,23 @@ function TaskCard({
 
                 <small>
 
-                    Created recently
+                    {
+                        task.completed
+
+                        ? "Completed ✓"
+
+                        : "Active task"
+
+                    }
 
                 </small>
 
 
 
+
+
                 <div>
+
 
 
                     <button
@@ -78,6 +117,41 @@ function TaskCard({
 
 
 
+
+                    <button
+
+                        className={
+                            task.completed
+
+                            ? "complete-btn undo"
+
+                            : "complete-btn"
+                        }
+
+                        onClick={() =>
+                            onComplete(task.id)
+                        }
+
+                    >
+
+                        {
+
+                        task.completed
+
+                        ? "↩ Undo"
+
+                        : "✓ Complete"
+
+                        }
+
+
+                    </button>
+
+
+
+
+
+
                     <button
 
                         className="delete-btn"
@@ -93,6 +167,7 @@ function TaskCard({
                     </button>
 
 
+
                 </div>
 
 
@@ -105,6 +180,8 @@ function TaskCard({
 
     );
 
+
 }
+
 
 export default TaskCard;
