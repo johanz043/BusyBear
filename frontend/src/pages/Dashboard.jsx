@@ -359,7 +359,11 @@ function Dashboard(){
 
 
                     <h1>
-                        0
+                        {
+                            tasks.filter(
+                                task => task.completed
+                            ).length
+                        }
                     </h1>
 
 
@@ -378,7 +382,11 @@ function Dashboard(){
 
 
                     <h1>
-                        {tasks.length}
+                        {
+                            tasks.filter(
+                                task => !task.completed
+                            ).length
+                        }
                     </h1>
 
 
