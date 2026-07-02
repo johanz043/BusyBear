@@ -1,27 +1,25 @@
 .task-card {
 
+    background: white;
 
-    background:white;
+    border-radius: 22px;
 
-    border-radius:22px;
+    padding: 25px;
 
-    padding:25px;
+    box-shadow: var(--shadow);
 
-    box-shadow:var(--shadow);
-
-    transition:.25s;
+    transition: .25s;
 
 }
 
 
 
-
 .task-card:hover {
 
-    transform:translateY(-5px);
+    transform: translateY(-5px);
 
     box-shadow:
-    0 15px 35px rgba(0,0,0,.12);
+        0 15px 35px rgba(0, 0, 0, .12);
 
 }
 
@@ -31,14 +29,15 @@
 
 .task-top {
 
+    display: flex;
 
-    display:flex;
+    justify-content: space-between;
 
-    justify-content:space-between;
+    align-items: flex-start;
 
-    align-items:center;
+    margin-bottom: 15px;
 
-    margin-bottom:15px;
+    gap: 15px;
 
 }
 
@@ -48,8 +47,11 @@
 
 .task-top h3 {
 
+    font-size: 22px;
 
-    font-size:22px;
+    margin: 0;
+
+    flex: 1;
 
 }
 
@@ -57,20 +59,55 @@
 
 
 
-.status-badge {
+.priority-badge {
+
+    padding: 6px 14px;
+
+    border-radius: 999px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-transform: capitalize;
+
+    white-space: nowrap;
+
+}
 
 
-    background:#FEF3C7;
 
-    color:#92400E;
 
-    padding:6px 12px;
 
-    border-radius:999px;
+.priority-badge.high {
 
-    font-size:13px;
+    background: #FEE2E2;
 
-    font-weight:600;
+    color: #DC2626;
+
+}
+
+
+
+
+
+.priority-badge.medium {
+
+    background: #FEF3C7;
+
+    color: #D97706;
+
+}
+
+
+
+
+
+.priority-badge.low {
+
+    background: #DCFCE7;
+
+    color: #16A34A;
 
 }
 
@@ -80,12 +117,11 @@
 
 .task-description {
 
+    color: var(--text-light);
 
-    color:var(--text-light);
+    line-height: 1.6;
 
-    line-height:1.6;
-
-    margin-bottom:25px;
+    margin-bottom: 25px;
 
 }
 
@@ -95,42 +131,53 @@
 
 .task-footer {
 
+    display: flex;
 
-    display:flex;
+    justify-content: space-between;
 
-    justify-content:space-between;
-
-    align-items:center;
+    align-items: center;
 
 }
+
 
 
 
 
 .task-footer small {
 
-
-    color:var(--text-light);
+    color: var(--text-light);
 
 }
 
 
 
 
+
 .edit-btn {
 
+    background: var(--primary);
 
-    background:var(--primary);
+    color: white;
 
-    color:white;
+    border: none;
 
-    border:none;
+    padding: 10px 15px;
 
-    padding:10px 15px;
+    border-radius: 10px;
 
-    border-radius:10px;
+    margin-right: 10px;
 
-    margin-right:10px;
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+
+.edit-btn:hover {
+
+    background: var(--primary-hover);
 
 }
 
@@ -140,16 +187,27 @@
 
 .delete-btn {
 
+    background: #EF4444;
 
-    background:#EF4444;
+    color: white;
 
-    color:white;
+    border: none;
 
-    border:none;
+    padding: 10px 15px;
 
-    padding:10px 15px;
+    border-radius: 10px;
 
-    border-radius:10px;
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+
+.delete-btn:hover {
+
+    background: #DC2626;
 
 }
 
@@ -157,19 +215,16 @@
 
 
 
+@media (max-width:600px) {
 
-@media(max-width:600px){
+    .task-footer {
 
+        flex-direction: column;
 
-.task-footer {
+        gap: 15px;
 
-    flex-direction:column;
+        align-items: flex-start;
 
-    gap:15px;
-
-    align-items:flex-start;
-
-}
-
+    }
 
 }

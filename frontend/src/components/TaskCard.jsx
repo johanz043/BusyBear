@@ -1,12 +1,10 @@
 import "./TaskCard.css";
 
-
 function TaskCard({
     task,
     onDelete,
     onEdit
 }) {
-
 
     return (
 
@@ -17,13 +15,17 @@ function TaskCard({
 
 
                 <h3>
+
                     {task.title}
+
                 </h3>
 
 
-                <span className="status-badge">
+                <span
+                    className={`priority-badge ${task.priority.toLowerCase()}`}
+                >
 
-                    Pending
+                    {task.priority}
 
                 </span>
 
@@ -36,7 +38,7 @@ function TaskCard({
             <p className="task-description">
 
                 {task.description ||
-                "No description provided"}
+                    "No description provided"}
 
             </p>
 
@@ -104,6 +106,5 @@ function TaskCard({
     );
 
 }
-
 
 export default TaskCard;
