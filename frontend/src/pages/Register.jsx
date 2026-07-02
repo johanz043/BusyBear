@@ -6,13 +6,15 @@ import api from "../services/api";
 import "./Login.css";
 
 
-function Login(){
+function Register(){
 
 
     const navigate = useNavigate();
 
 
     const [username,setUsername] = useState("");
+
+    const [email,setEmail] = useState("");
 
     const [password,setPassword] = useState("");
 
@@ -27,7 +29,6 @@ function Login(){
 
         e.preventDefault();
 
-
         setError("");
 
 
@@ -35,13 +36,15 @@ function Login(){
         try{
 
 
-            const response = await api.post(
+            await api.post(
 
-                "/login",
+                "/users",
 
                 {
 
                     username,
+
+                    email,
 
                     password
 
@@ -51,17 +54,8 @@ function Login(){
 
 
 
-            localStorage.setItem(
+            navigate("/login");
 
-                "token",
-
-                response.data.access_token
-
-            );
-
-
-
-            navigate("/dashboard");
 
 
         }
@@ -70,19 +64,17 @@ function Login(){
 
             console.error(
 
-                "Login failed:",
-
-                error.response?.data || error
+                "Register failed:",
+                error
 
             );
-
 
 
             setError(
 
                 error.response?.data?.message ||
 
-                "Login failed"
+                "Registration failed"
 
             );
 
@@ -96,13 +88,11 @@ function Login(){
 
 
 
-
-
     return (
 
 
-
         <div className="login-page">
+
 
 
             <div className="login-card">
@@ -121,7 +111,7 @@ function Login(){
 
                     <p>
 
-                        Login to manage your tasks
+                        Create your account
 
                     </p>
 
@@ -162,13 +152,44 @@ function Login(){
 
                             type="text"
 
-                            placeholder="Username or Email"
+                            placeholder="Username"
 
                             value={username}
 
                             onChange={
                                 e =>
                                 setUsername(
+                                    e.target.value
+                                )
+                            }
+
+                            required
+
+                        />
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div className="login-group">
+
+
+                        <input
+
+                            type="email"
+
+                            placeholder="Email"
+
+                            value={email}
+
+                            onChange={
+                                e =>
+                                setEmail(
                                     e.target.value
                                 )
                             }
@@ -225,7 +246,7 @@ function Login(){
 
                     >
 
-                        Login
+                        Create Account
 
 
                     </button>
@@ -240,11 +261,10 @@ function Login(){
 
 
 
-
                 <div className="login-footer">
 
 
-                    Don't have an account?
+                    Already have an account?
 
 
                     <button
@@ -252,15 +272,15 @@ function Login(){
                         className="link-btn"
 
                         onClick={() =>
-                            navigate("/register")
+                            navigate("/login")
                         }
 
                     >
 
-                        Create account
-
+                        Login
 
                     </button>
+
 
 
                 </div>
@@ -268,9 +288,8 @@ function Login(){
 
 
 
-
-
             </div>
+
 
 
         </div>
@@ -278,8 +297,7 @@ function Login(){
 
     );
 
-
 }
 
 
-export default Login;
+export default Register;

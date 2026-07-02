@@ -186,3 +186,26 @@
     font-weight: 500;
 
 }
+
+.link-btn {
+
+    background:none;
+
+    border:none;
+
+    color:#4F46E5;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    margin-left:5px;
+
+}
+
+
+.link-btn:hover {
+
+    text-decoration:underline;
+
+}
