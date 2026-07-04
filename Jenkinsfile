@@ -9,13 +9,13 @@ pipeline {
             }
         }
 
-        stage('Build Backend') {
+        stage('Backend Build') {
             steps {
                 sh 'docker build -t busybear-backend ./backend'
             }
         }
 
-        stage('Build Frontend') {
+        stage('Frontend Build') {
             steps {
                 sh 'docker build -t busybear-frontend ./frontend'
             }
