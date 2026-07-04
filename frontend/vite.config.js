@@ -1,3 +1,4 @@
+// Allows Vite to understand React code
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 

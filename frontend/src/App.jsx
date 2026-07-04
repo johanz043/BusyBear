@@ -1,3 +1,5 @@
+// Handles frontend routing
+
 import {
   Routes,
   Route

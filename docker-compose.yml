@@ -1,3 +1,4 @@
+#Runs all the containers together
 services:
   backend:
     build: ./backend
