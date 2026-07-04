@@ -9,9 +9,9 @@ pipeline {
             }
         }
 
-        stage('Build Backend Docker Image') {
+        stage('Docker Test') {
             steps {
-                sh 'docker build -t busybear-backend ./backend'
+                sh 'docker version'
             }
         }
 
