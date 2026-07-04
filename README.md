@@ -9,6 +9,8 @@ Users can:
 
 All task operations are handled through a service layer in the frontend, which communicates with the Flask backend, which then interacts with Supabase.
 
+BusyBear is hosted through Vercel and Render
+
 
 
 # QuickMeals
